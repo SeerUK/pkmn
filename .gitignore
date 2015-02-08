@@ -1,4 +1,7 @@
 .idea/
 logs/
 node_modules/
-*.log
+src/vendor/
+npm-debug.log
+.DS_Store
+.tern-port

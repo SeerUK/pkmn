@@ -1,13 +1,12 @@
 {
   "name": "pkmn",
-  "version": "0.0.1a",
+  "version": "0.0.1",
   "homepage": "https://github.com/SeerUK/pkmn",
   "authors": [
     "Elliot Wright <elliot@elliotwright.co>"
   ],
-  "main": "web/index.html",
+  "main": "build/index.html",
   "keywords": [
-    "pokemon",
     "game",
     "js"
   ],
@@ -18,5 +17,9 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "EaselJS": "~0.8.0",
+    "bluebird": "~2.9.7"
+  }
 }
