@@ -9,39 +9,27 @@
 
 "use strict";
 
-module.exports = function(Tile, subClassFactory) {
+module.exports = function(c, Tile, TILE_SIZE) {
     var that = this;
 
-    that.BoxClass = {
-        /**
-         * Initialize hero entity
-         *
-         * @param  {int} x
-         * @param  {int} y
-         *
-         * @return {void}
-         */
-        initialize: function(x, y, name) {
-            Tile.prototype.initialize.call(this, null);
+    var Box = function(x, y) {
+        this.Tile_constructor.apply(this, arguments);
 
-            this.name = name;
-
-            that.initalizeDisplay.call(this);
-        }
+        that.initializeDisplay.call(this);
     };
 
-    /**
-     * Initialize the appearance of the hero entity
-     *
-     * @return {void}
-     */
-    that.initalizeDisplay = function() {
-        this.graphics.beginFill("red").drawRect(0, 0, 32, 32);
+    that.initializeDisplay = function() {
+        var entity = new c.Shape();
+        entity.graphics.beginFill("red").drawRect(0, 0, TILE_SIZE, TILE_SIZE);
+
+        this.addChild(entity);
     };
 
     return {
         build: function() {
-            return subClassFactory.build(Tile, "Box", that.BoxClass);
+            c.extend(Box, Tile);
+
+            return c.promote(Box, "Tile");
         }
     };
 };

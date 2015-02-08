@@ -9,47 +9,28 @@
 
 "use strict";
 
-var TILE_SIZE = 32;
-
-module.exports = function(c, subClassFactory) {
+module.exports = function(c, TILE_SIZE) {
     var that = this;
 
-    that.TileClass = {
-        /**
-         * Initialize the entity
-         *
-         * @param  {int} x
-         * @param  {int} y
-         *
-         * @return {void}
-         */
-        initialize: function(x, y) {
-            // c.Shape.prototype.initialize.apply(this, arguments);
-            console.log(c.Shape.prototype);
+    var Tile = function(x, y) {
+        this.Container_constructor.apply(this, arguments);
 
-            this.setPosition(x, y);
-        },
+        that.setPosition.call(this, x, y);
+    };
 
-        /**
-         * Set position of tile entity
-         *
-         * @param {int} x
-         * @param {int} y
-         *
-         * @return {void}
-         */
-        setPosition: function(x, y) {
-            this.cX = x;
-            this.cY = y;
+    that.setPosition = function(x, y) {
+        this.cX = x;
+        this.cY = y;
 
-            this.x = x * TILE_SIZE;
-            this.y = y * TILE_SIZE;
-        }
+        this.x = x * TILE_SIZE;
+        this.y = y * TILE_SIZE;
     };
 
     return {
         build: function() {
-            return subClassFactory.build(c.Shape, "Tile", that.TileClass);
+            c.extend(Tile, c.Container);
+
+            return c.promote(Tile, "Container");
         }
     };
 };
